@@ -52,10 +52,7 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
 		'options'
 	];
 
@@ -67,28 +64,6 @@ class MainMenuState extends MusicBeatState
 	override function create()
 	{
 		mainmenuJSON = Json.parse(Paths.getTextFromFile('images/mainMenuOptions.json'));
-		// Removes the Options early, hoping this crap works.
-		if (!mainmenuJSON.storymode) {
-			optionShit.remove("story_mode");
-		}
-		if (!mainmenuJSON.freeplay) {
-			optionShit.remove("freeplay");
-		}
-		if (!mainmenuJSON.mods) {
-			optionShit.remove("mods");
-		}
-		if (!mainmenuJSON.awards) {
-			optionShit.remove("awards");
-		}
-		if (!mainmenuJSON.credits) {
-			optionShit.remove("credits");
-		}
-		if (!mainmenuJSON.donate) {
-			optionShit.remove("donate");
-		}
-		if (!mainmenuJSON.options) {
-			optionShit.remove("options");
-		}
 	
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
@@ -159,11 +134,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			if (mainmenuJSON.shoveleft) { 
-				menuItem.x = 100;
-			}else{
-				menuItem.screenCenter(X);
-			}
+			menuItem.x = 100;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -231,28 +202,6 @@ class MainMenuState extends MusicBeatState
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
-
-		if (!mainmenuJSON.storymode) {
-			optionShit.remove("story_mode");
-		}
-		if (!mainmenuJSON.freeplay) {
-			optionShit.remove("freeplay");
-		}
-		if (!mainmenuJSON.mods) {
-			optionShit.remove("mods");
-		}
-		if (!mainmenuJSON.awards) {
-			optionShit.remove("awards");
-		}
-		if (!mainmenuJSON.credits) {
-			optionShit.remove("credits");
-		}
-		if (!mainmenuJSON.donate) {
-			optionShit.remove("donate");
-		}
-		if (!mainmenuJSON.options) {
-			optionShit.remove("options");
-		}
 
 		if (!selectedSomethin)
 		{
@@ -339,12 +288,6 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			if (!mainmenuJSON.shoveleft) {
-				spr.screenCenter(X);
-			}
-		});
 	}
 
 	function changeItem(huh:Int = 0)

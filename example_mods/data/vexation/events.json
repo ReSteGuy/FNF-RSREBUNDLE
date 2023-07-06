@@ -1,0 +1,156 @@
+{
+	"song": {
+		"events": [
+			[
+				74100,
+				[
+					[
+						"Play Animation",
+						"corruption",
+						"Dad"
+					]
+				]
+			],
+			[
+				93600,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					],
+					[
+						"Change Scroll Speed",
+						"1.25",
+						"2.4"
+					]
+				]
+			],
+			[
+				94200,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				94800,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					],
+					[
+						"ChangePhillyCustom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				95100,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				95400,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				95550,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				95700,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				95850,
+				[
+					[
+						"Add Camera Zoom",
+						"0.3",
+						"0.03"
+					]
+				]
+			],
+			[
+				96000,
+				[
+					[
+						"Change Character",
+						"Dad",
+						"rsguysemi"
+					],
+					[
+						"Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				256800,
+				[
+					[
+						"Screen Shake",
+						"3",
+						"0.1"
+					]
+				]
+			],
+			[
+				258000,
+				[
+					[
+						"ChangePhillyCustom",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				259200,
+				[
+					[
+						"Flash",
+						"",
+						""
+					],
+					[
+						"Change Character",
+						"Dad",
+						"rsguymon"
+					]
+				]
+			]
+		]
+	}
+}

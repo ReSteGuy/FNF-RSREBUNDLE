@@ -1,0 +1,10 @@
+{
+	"storymode":true,
+	"freeplay":true,
+	"mods":true,
+	"awards":false,
+	"credits":true,
+	"donate":false,
+	"options":true,
+	"shoveleft":false
+}
