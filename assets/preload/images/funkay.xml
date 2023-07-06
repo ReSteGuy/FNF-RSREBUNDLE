@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="funkay.png">
+	<!-- Created with Adobe Animate version 18.0.1.115 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ani0000" x="3" y="3" width="1675" height="1083"/>
+	<SubTexture name="ani0001" x="1681" y="3" width="1675" height="1083"/>
+	<SubTexture name="ani0002" x="3359" y="3" width="1675" height="1083"/>
+	<SubTexture name="ani0003" x="5037" y="3" width="1675" height="1083"/>
+	<SubTexture name="ani0004" x="3" y="1089" width="1675" height="1083"/>
+	<SubTexture name="ani0005" x="1681" y="1089" width="1675" height="1083"/>
+	<SubTexture name="ani0006" x="3359" y="1089" width="1675" height="1083"/>
+	<SubTexture name="ani0007" x="5037" y="1089" width="1675" height="1083"/>
+	<SubTexture name="ani0008" x="3" y="2175" width="1675" height="1083"/>
+	<SubTexture name="ani0009" x="1681" y="2175" width="1675" height="1083"/>
+	<SubTexture name="ani0010" x="3359" y="2175" width="1675" height="1083"/>
+	<SubTexture name="ani0011" x="5037" y="2175" width="1675" height="1083"/>
+	<SubTexture name="ani0012" x="3" y="3261" width="1675" height="1083"/>
+	<SubTexture name="ani0013" x="1681" y="3261" width="1675" height="1083"/>
+	<SubTexture name="ani0014" x="3359" y="3261" width="1675" height="1083"/>
+	<SubTexture name="ani0015" x="5037" y="3261" width="1675" height="1083"/>
+	<SubTexture name="ani0016" x="3" y="4347" width="1675" height="1083"/>
+	<SubTexture name="ani0017" x="1681" y="4347" width="1675" height="1083"/>
+	<SubTexture name="ani0018" x="3359" y="4347" width="1675" height="1083"/>
+	<SubTexture name="ani0019" x="5037" y="4347" width="1675" height="1083"/>
+	<SubTexture name="ani0020" x="3" y="5433" width="1675" height="1083"/>
+	<SubTexture name="ani0021" x="1681" y="5433" width="1675" height="1083"/>
+	<SubTexture name="ani0022" x="3359" y="5433" width="1675" height="1083"/>
+	<SubTexture name="ani0023" x="5037" y="5433" width="1675" height="1083"/>
+</TextureAtlas>
