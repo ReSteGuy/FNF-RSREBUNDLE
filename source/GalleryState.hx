@@ -45,7 +45,7 @@ class GalleryState extends MusicBeatState
 	var displayImage:FlxSprite;
 	var selectedSomethin:Bool = false;
 	var zoomValue:Float = 1;
-	displayImage.antialiasing = ClientPrefs.globalAntialiasing;
+	displayImage.antialiasing = true;
 	displayImage:screenCenter();
 
 	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
