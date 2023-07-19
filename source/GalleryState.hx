@@ -38,15 +38,15 @@ import openfl.Assets;
 
 class GalleryState extends MusicBeatState
 {
-	var images:Array<String> = [];
-	var descriptions:Array<String> = [];
+	var images:Array<String> = ["picture1", "picture2"];
+	var descriptions:Array<String> = ["picture1", "picture2"];
 	var imageSelected:Float = 0;
 	var imageDisplaying:Float = 0;
 	var displayImage:FlxSprite;
 	var selectedSomethin:Bool = false;
 	var zoomValue:Float = 1;
 	displayImage.antialiasing = true;
-	displayImage:screenCenter();
+	displayImage.screenCenter();
 
 	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 	bg.screenCenter();
