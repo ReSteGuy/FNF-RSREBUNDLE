@@ -60,6 +60,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	var galleryKey:Array<FlxKey>;
 
 	override function create()
 	{
@@ -75,6 +76,7 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
+		galleryKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_3'));
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -279,9 +281,14 @@ class MainMenuState extends MusicBeatState
 			}
 			#if desktop
 			else if (FlxG.keys.anyJustPressed(debugKeys))
-			{
+			{	
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
+			}
+			else if (FlxG.keys.anyJustPressed(galleryKey))
+			{	
+				selectedSomethin = true;
+				MusicBeatState.switchState(new GalleryState());
 			}
 			#end
 		}
