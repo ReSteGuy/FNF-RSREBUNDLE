@@ -71,12 +71,12 @@ class GalleryState extends MusicBeatState
 			if (controls.UI_UP)
 			{	
 				zoomValue += 0.5;
-				displayImage.scale.set(1 * zoomValue, 1 * zoomValue)
+				displayImage.scale.set(1 * zoomValue, 1 * zoomValue);
 			}
 			if (controls.UI_DOWN)
 			{
 				zoomValue += 0.5;
-				displayImage.scale.set(1 * zoomValue, 1 * zoomValue)
+				displayImage.scale.set(1 * zoomValue, 1 * zoomValue);
 			}
 			if (controls.UI_LEFT)
 			{	
