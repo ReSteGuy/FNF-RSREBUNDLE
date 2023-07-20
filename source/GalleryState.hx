@@ -47,7 +47,11 @@ class GalleryState extends MusicBeatState
 	var selectedSomethin:Bool = false;
 	var zoomValue:Float = 1;
 	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+
+	override public function create():Void
+	{
 		add(bg);
+		add(displayImage);
 
 		displayImage.antialiasing = true;
 		displayImage.screenCenter();
@@ -66,6 +70,7 @@ class GalleryState extends MusicBeatState
         titleTxt.setFormat(null, 40, 0xffffff, "center");
         titleTxt.setFormat(Paths.font("vcr.ttf"), 32);
         add(titleTxt);
+	}
 
 
 	function update(elapsed:Float)
