@@ -38,20 +38,39 @@ import openfl.Assets;
 
 class GalleryState extends MusicBeatState
 {
-	var images:Array<String> = ["picture1", "picture2"];
-	var descriptions:Array<String> = ["picture1", "picture2"];
+	var images:Array<String> = ["pic1", "pic2"];
+	var titlesImg:Array<String> = ["This is test for title", "This is test for title 2 WOW"];
+	var descriptions:Array<String> = ["This is test for desc", "This is test for desc 2 WOW"];
 	var imageSelected:Float = 0;
 	var imageDisplaying:Float = 0;
 	var displayImage:FlxSprite;
 	var selectedSomethin:Bool = false;
 	var zoomValue:Float = 1;
-	displayImage.antialiasing = true;
-	displayImage.screenCenter();
-
 	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-	bg.screenCenter();
-	bg.antialiasing = ClientPrefs.globalAntialiasing;
-	add(bg);
+
+	override public function create():Void
+	{
+
+		add(bg);
+
+		displayImage.antialiasing = true;
+		displayImage.screenCenter();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		descText = new FlxText(50, -100, FlxG.width - 100, descriptions[imageSelected]);
+        descText.setFormat(null, 25, 0xffffff, "center");
+        descText.screenCenter();
+        descText.y += 265;
+        descText.setFormat(Paths.font("vcr.ttf"), 32);
+        add(descText);
+
+        titleTxt = new FlxText(50, 50, FlxG.width - 100, titleImg[imageSelected]);
+        titleTxt.screenCenter(X);
+        titleTxt.setFormat(null, 40, 0xffffff, "center");
+        titleTxt.setFormat(Paths.font("vcr.ttf"), 32);
+        add(titleTxt);
+	}
 
 	function update(elapsed:Float)
 	{	
@@ -66,7 +85,7 @@ class GalleryState extends MusicBeatState
 			if (controls.BACK)
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new ModsMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 			}
 			if (controls.UI_UP)
 			{	
@@ -83,6 +102,7 @@ class GalleryState extends MusicBeatState
 				if (imageSelected != 0)
 				{
 					imageSelected -= 1;
+					FlxG.sound.play(Paths.sound("scrollMenu"));
 				}
 			}
 			if (controls.UI_RIGHT)
@@ -90,6 +110,7 @@ class GalleryState extends MusicBeatState
 				if (imageSelected != images.length)
 				{
 					imageSelected += 1;
+					FlxG.sound.play(Paths.sound("scrollMenu"));
 				}
 			}
 		}
