@@ -7,6 +7,7 @@ import sys.thread.Thread;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.text.FlxText;
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
@@ -35,6 +36,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
+import flixel.addons.ui.FlxInputText;
+import flixel.FlxObject;
 
 class GalleryState extends MusicBeatState
 {
@@ -67,7 +70,7 @@ class GalleryState extends MusicBeatState
         descText.setFormat(Paths.font("vcr.ttf"), 32);
         add(descText);
 
-        titleTxt = new FlxText(50, 50, FlxG.width - 100, titleImg[imageSelected]);
+        titleTxt = new FlxText(50, 50, FlxG.width - 100, titlesImg[imageSelected]);
         titleTxt.screenCenter(X);
         titleTxt.setFormat(null, 40, 0xffffff, "center");
         titleTxt.setFormat(Paths.font("vcr.ttf"), 32);
