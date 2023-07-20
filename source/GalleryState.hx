@@ -78,7 +78,7 @@ class GalleryState extends MusicBeatState
 	}
 
 
-	function update(elapsed:Float)
+	override function update(elapsed:Float)
 	{	
 		
 		if (imageDisplaying != imageSelected)
