@@ -1,124 +1,119 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-import sys.thread.Thread;
-#end
-import flixel.FlxG;
+import flixel.*;
 import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.input.keyboard.FlxKey;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.addons.transition.TransitionData;
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-#if MODS_ALLOWED
-import sys.FileSystem;
-import sys.io.File;
-#end
-import options.GraphicsSettingsSubState;
-//import flixel.graphics.FlxGraphic;
+import Controls.KeyboardScheme;
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.frames.FlxFrame;
-import flixel.group.FlxGroup;
-import flixel.input.gamepad.FlxGamepad;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import flixel.system.FlxSound;
-import flixel.system.ui.FlxSoundTray;
-import flixel.text.FlxText;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import openfl.Assets;
+import lime.app.Application;
+import flixel.math.FlxMath;
+import sys.FileSystem;
 import flixel.addons.ui.FlxInputText;
-import flixel.FlxObject;
 
-class GalleryState extends MusicBeatState
+class Gallery extends MusicBeatState
 {
-	var images:Array<String> = ["pic1", "pic2"];
-	var titlesImg:Array<String> = ["This is test for title", "This is test for title 2 WOW"];
-	var descriptions:Array<String> = ["This is test for desc", "This is test for desc 2 WOW"];
-	var imageSelected:Float = 0;
-	var imageDisplaying:Float = 0;
-	var displayImage:FlxSprite;
-	var selectedSomethin:Bool = false;
-	var zoomValue:Float = 1;
-	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-	var descText:FlxText;
-    var titleTxt:FlxText;
-	
-	override public function create():Void
-	{
-		add(bg);
-		add(displayImage);
+    var itemGroup:FlxTypedGroup<GalleryImage>;
+    var imagePaths:Array<String>;
+    var imageDescriptions:Array<String>;
+    var imageTitle:Array<String>;
+    var currentIndex:Int = 0;
+    var descriptionText:FlxText;
+    var titleText:FlxText;
+    var background:FlxSprite;
+    var imageSprite:FlxSprite;
+    var bg:FlxSprite;
 
-		displayImage.antialiasing = true;
-		displayImage.screenCenter();
-		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		
-		descText = new FlxText(50, -100, FlxG.width - 100, descriptions[imageSelected]);
-        descText.setFormat(null, 25, 0xffffff, "center");
-        descText.screenCenter();
-        descText.y += 265;
-        descText.setFormat(Paths.font("vcr.ttf"), 32);
-        add(descText);
+    override public function create():Void
+    {
+        // Set up background
+        background = new FlxSprite(10, 50).loadGraphic(Paths.image("menuBG"));
+        background.setGraphicSize(Std.int(background.width * 1));
+        background.screenCenter();
+        add(background);
 
-        titleTxt = new FlxText(50, 50, FlxG.width - 100, titlesImg[imageSelected]);
-        titleTxt.screenCenter(X);
-        titleTxt.setFormat(null, 40, 0xffffff, "center");
-        titleTxt.setFormat(Paths.font("vcr.ttf"), 32);
-        add(titleTxt);
-	}
+        // Set up image paths and descriptions
+        imagePaths = ["gallery/image1", "gallery/image2", "gallery/image3", "gallery/image4"];
+        imageDescriptions = ["Fun fact: The head was made, scrapped for 3 months, then was reused.", "bro gave me back pain from the 3 sketches i had to do.", "he was never planned to be added in the first place", "the sketch is old as crap."];
+        imageTitle = ["RSGuy Sketch", "Glitchi Sketch", "Flputer Sketch", "Test Guy Sketch"];
 
+        itemGroup = new FlxTypedGroup<GalleryImage>();
+        
+        for (id => i in imagePaths) {
+            var newItem = new GalleryImage();
+            newItem.loadGraphic(Paths.image(i));
+            newItem.ID = id;
+            itemGroup.add(newItem);
+        }
+        
+        add(itemGroup);
 
-	override function update(elapsed:Float)
-	{	
-		
-		if (imageDisplaying != imageSelected)
-		{
-			displayImage.loadGraphic(Paths.image("gallery/" + images[imageSelected]));
-			imageDisplaying = imageSelected;
-		}
-		if (!selectedSomethin)
-		{
-			if (controls.BACK)
-			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MainMenuState());
-			}
-			if (controls.UI_UP)
-			{	
-				zoomValue += 0.5;
-				displayImage.scale.set(1 * zoomValue, 1 * zoomValue);
-			}
-			if (controls.UI_DOWN)
-			{
-				zoomValue += 0.5;
-				displayImage.scale.set(1 * zoomValue, 1 * zoomValue);
-			}
-			if (controls.UI_LEFT)
-			{	
-				if (imageSelected != 0)
-				{
-					imageSelected -= 1;
-					FlxG.sound.play(Paths.sound("scrollMenu"));
-				}
-			}
-			if (controls.UI_RIGHT)
-			{
-				if (imageSelected != images.length)
-				{
-					imageSelected += 1;
-					FlxG.sound.play(Paths.sound("scrollMenu"));
-				}
-			}
-		}
-	}
+        descriptionText = new FlxText(50, -100, FlxG.width - 100, imageDescriptions[currentIndex]);
+        descriptionText.setFormat(null, 25, 0xffffff, "center");
+        descriptionText.screenCenter();
+        descriptionText.y += 250;
+        descriptionText.setFormat(Paths.font("vcr.ttf"), 32);
+        add(descriptionText);
+
+        titleText = new FlxText(50, 50, FlxG.width - 100, imageTitle[currentIndex]);
+        titleText.screenCenter(X);
+        titleText.setFormat(null, 40, 0xffffff, "center");
+        titleText.setFormat(Paths.font("vcr.ttf"), 32);
+        add(titleText);
+        
+        persistentUpdate = true;
+        changeSelection();
+    }
+
+    var allowInputs:Bool = true;
+    
+    override public function update(elapsed:Float):Void
+    {
+        super.update(elapsed);
+
+        // Handle left and right arrow keys to scroll through image
+        if ((controls.UI_LEFT_P || controls.UI_RIGHT_P) && allowInputs) {
+            changeSelection(controls.UI_LEFT_P ? -1 : 1);
+            FlxG.sound.play(Paths.sound("scrollMenu"));
+        }
+        
+        if (controls.BACK && allowInputs)
+        {
+            allowInputs = false;
+            FlxG.sound.play(Paths.sound('cancelMenu'));
+            MusicBeatState.switchState(new MainMenuState());
+        }
+    }
+    
+    private function changeSelection(i = 0)
+    {
+        currentIndex = FlxMath.wrap(currentIndex + i, 0, imageTitle.length - 1);
+        
+        descriptionText.text = imageDescriptions[currentIndex];
+
+        titleText.text = imageTitle[currentIndex]; 
+        
+        var change = 0;
+        for (item in itemGroup) {
+            item.posX = change++ - currentIndex;
+            item.alpha = item.ID == currentIndex ? 1 : 0.6;
+        }
+    }
+}
+
+class GalleryImage extends FlxSprite {
+    public var posX:Float = 0;
+    
+    // Edit the 760 to change the distance between each image
+    override function update(elapsed:Float) {
+        super.update(elapsed);
+        x = FlxMath.lerp(x, (FlxG.width - width) / 2 + posX * 760, CoolUtil.boundTo(elapsed * 3, 0, 1));
+    }
 }

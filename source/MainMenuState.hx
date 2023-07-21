@@ -52,6 +52,7 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
+		'gallery',
 		'credits',
 		'options'
 	];
@@ -60,7 +61,6 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var galleryKey:Array<FlxKey>;
 
 	override function create()
 	{
@@ -76,7 +76,6 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
-		galleryKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_3'));
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -263,6 +262,8 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
+									case 'gallery':
+										MusicBeatState.switchState(new GalleryState());
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
@@ -284,11 +285,6 @@ class MainMenuState extends MusicBeatState
 			{	
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
-			}
-			else if (FlxG.keys.anyJustPressed(galleryKey))
-			{	
-				selectedSomethin = true;
-				MusicBeatState.switchState(new GalleryState());
 			}
 			#end
 		}
